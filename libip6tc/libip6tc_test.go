@@ -28,7 +28,8 @@ import (
 func TestInit(t *testing.T) {
 	acquired, err := common.XtablesLock(false, 0)
 	if err != nil {
-		t.Fatal(err)
+		t.Error(err)
+		t.FailNow()
 	}
 	if !acquired {
 		t.FailNow()
@@ -42,11 +43,13 @@ func TestInit(t *testing.T) {
 
 	handle, err := TableInit("filter")
 	if err != nil {
-		t.Fatal(err)
+		t.Error(err)
+		t.FailNow()
 	}
 
 	err = handle.Free()
 	if err != nil {
-		t.Fatal(err)
+		t.Error(err)
+		t.FailNow()
 	}
 }
