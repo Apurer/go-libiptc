@@ -20,10 +20,11 @@ jobs:
     - name: Install dependency
       run: |
         sudo apt-get update
+        sudo apt-get install iptables
         sudo apt-get install iptables-dev
         sudo go get github.com/apurer/go-libiptc
-    - name: Fix
-      run: sudo apt-get install linux-image-$(uname -r)
+#    - name: Fix
+#      run: sudo apt-get install linux-image-$(uname -r)
 #         sudo modprobe ip_tables
 #         sudo echo 'ip_tables' >> /etc/modules
        
