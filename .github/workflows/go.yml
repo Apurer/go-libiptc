@@ -23,6 +23,10 @@ jobs:
         sudo apt-get install iptables
         sudo apt-get install iptables-dev
         sudo go get github.com/apurer/go-libiptc
+    - name: Init iptables
+      run: |
+        sudo modprobe ip_tables
+        sudo echo 'ip_tables' >> /etc/modules
        
     - name: Build
       run: go build -v ./...
