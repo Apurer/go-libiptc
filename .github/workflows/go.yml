@@ -19,10 +19,10 @@ jobs:
         go-version: 1.15
     - name: Install dependency
       run: |
-        apt-get update
-        apt-get install iptables
-        apt-get install iptables-dev
-        go get github.com/apurer/go-libiptc
+        sudo apt-get update
+        sudo apt-get install iptables
+        sudo apt-get install iptables-dev
+        sudo go get github.com/apurer/go-libiptc
        
     - name: Build
       run: go build -v ./...
