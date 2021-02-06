@@ -1,6 +1,6 @@
 /*
  * go-libiptc v0.3.1 - libiptc bindings for Go language
- * Copyright (C) 2015 gdm85 - https://github.com/gdm85/go-libiptc/
+ * Copyright (C) 2015 apurer - https://github.com/apurer/go-libiptc/
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,9 +23,9 @@ import (
 	"fmt"
 	"os"
 
-	common "github.com/gdm85/go-libiptc"
-	"github.com/gdm85/go-libiptc/libip4tc"
-	"github.com/gdm85/go-libiptc/libip6tc"
+	common "github.com/apurer/go-libiptc"
+	"github.com/apurer/go-libiptc/libip4tc"
+	"github.com/apurer/go-libiptc/libip6tc"
 )
 
 func showSyntax() {

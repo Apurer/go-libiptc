@@ -1,6 +1,6 @@
 /*
  * go-libiptc v0.3.1 - libiptc bindings for Go language
- * Copyright (C) 2015~2016 gdm85 - https://github.com/gdm85/go-libiptc/
+ * Copyright (C) 2015~2016 apurer - https://github.com/apurer/go-libiptc/
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	common "github.com/gdm85/go-libiptc"
+	common "github.com/apurer/go-libiptc"
 )
 
 func cuint2ip(cAaddr, cMask C.in_addr_t) *net.IPNet {
@@ -241,7 +241,7 @@ func (h XtcHandle) GetPolicy(chain string) (policy string, counters common.XtCou
 		cStr := C.CString(chain)
 		defer C.free(unsafe.Pointer(cStr))
 
-		var c _Ctype_struct_xt_counters
+		var c C.struct_xt_counters
 		cStr = C.iptc_get_policy(cStr, &c, h.handle)
 		if cStr == nil {
 			// no chains
@@ -471,9 +471,9 @@ func (h XtcHandle) SetPolicy(chain, policy common.XtChainLabel, counters *common
 		cPolicy := C.CString(string(policy))
 		defer C.free(unsafe.Pointer(cPolicy))
 
-		var c *_Ctype_struct_xt_counters
+		var c *C.struct_xt_counters
 		if counters != nil {
-			c = &_Ctype_struct_xt_counters{}
+			c = &C.struct_xt_counters{}
 			c.bcnt = C.__u64(counters.Bcnt)
 			c.pcnt = C.__u64(counters.Pcnt)
 		}
@@ -560,7 +560,7 @@ func (h XtcHandle) SetCounter(chain common.XtChainLabel, ruleNum uint, counters 
 		cStr := C.CString(string(chain))
 		defer C.free(unsafe.Pointer(cStr))
 
-		var c _Ctype_struct_xt_counters
+		var c C.struct_xt_counters
 		c.bcnt = C.__u64(counters.Bcnt)
 		c.pcnt = C.__u64(counters.Pcnt)
 

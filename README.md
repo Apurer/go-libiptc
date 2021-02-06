@@ -20,10 +20,10 @@ Please note that there is no public/stable C/C++ API for libiptc, quoting from o
 
 Install the dependency with `go get` or your dependency system of choice.
 ```
-go get github.com/gdm85/go-libiptc
+go get github.com/apurer/go-libiptc
 ```
 
-You can use xtables locking features by importing `github.com/gdm85/go-libiptc` and IPv4/IPv6 features by importing either `github.com/gdm85/go-libiptc/ipv4` or `github.com/gdm85/go-libiptc/ipv6`.
+You can use xtables locking features by importing `github.com/apurer/go-libiptc` and IPv4/IPv6 features by importing either `github.com/apurer/go-libiptc/ipv4` or `github.com/apurer/go-libiptc/ipv6`.
 
 Once the package is imported and being used, the OS thread is locked to a specific background goroutine and all calls are performed serially through such goroutine.
 
