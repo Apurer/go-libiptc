@@ -92,7 +92,7 @@ func InetNtop(b []byte) string {
 	defer C.free(unsafe.Pointer(str))
 	output := C.inet_ntop(C.AF_INET, buf, str, C.INET6_ADDRSTRLEN)
 	defer C.free(unsafe.Pointer(output))
-	err := C.GoInt(output)
+	err := C.GoInt32(output)
 	if err == nil {
 		cs_er := C.CString("inet_pton")
 		C.perror(cs_er)
