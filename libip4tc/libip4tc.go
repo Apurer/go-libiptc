@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 package libip4tc
 
 // #cgo LDFLAGS: -lip4tc
+// #include <arpa/inet.h>
 // #include <libiptc/libiptc.h>
 // #include <stdlib.h>
 import "C"
