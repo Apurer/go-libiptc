@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 package libip4tc
 
 import (
+	"fmt"
 	"testing"
 
 	common "github.com/apurer/go-libiptc"
@@ -72,4 +73,9 @@ func TestInit(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+}
+
+func TestInetPton(t *testing.T) {
+	ip = InetPton("1.2.3.4")
+	fmt.Println(ip)
 }

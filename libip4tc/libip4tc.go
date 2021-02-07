@@ -26,6 +26,7 @@ import "C"
 
 import (
 	"net"
+	"os"
 	"runtime"
 	"unsafe"
 
@@ -58,6 +59,27 @@ func (h IptEntry) IsEmpty() bool {
 
 type XtcHandle struct {
 	handle *C.struct_xtc_handle
+}
+
+func InetPton(string ip) int {
+	var s C.int
+	var buf [C.sizeof_struct_in_addr]C.uchar
+
+	cs := C.CString(ip)
+	defer C.free(unsafe.Pointer(cs))
+	s = C.inet_pton(C.AF_INET, ip, buf)
+	if s <= 0 {
+		if s == 0 {
+			panic("Not in presentation format")
+		} else {
+			cs_er := C.CString("inet_pton")
+			C.perror(cs_er)
+			C.free(unsafe.Pointer(cs_er))
+			os.Exit(1)
+		}
+	}
+
+	return int(s)
 }
 
 func (h XtcHandle) IptEntry2Rule(e *IptEntry) *common.Rule {
