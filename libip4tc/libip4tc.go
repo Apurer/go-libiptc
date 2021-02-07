@@ -70,7 +70,7 @@ func InetPton(ip string) []byte {
 	cs := C.CString(ip)
 	defer C.free(unsafe.Pointer(cs))
 	s = C.inet_pton(C.AF_INET, cs, buf)
-	defer C.free(unsafe.Pointer(s))
+	//defer C.free(unsafe.Pointer(s))
 	if s <= 0 {
 		if s == 0 {
 			panic("Not in presentation format")
@@ -88,8 +88,8 @@ func InetPton(ip string) []byte {
 func InetNtop(b []byte) string {
 	buf := C.CBytes(b)
 	defer C.free(unsafe.Pointer(buf))
-	var str [C.INET6_ADDRSTRLEN]C.char
-	defer C.free(unsafe.Pointer(str))
+	var str C.char
+	//defer C.free(unsafe.Pointer(str))
 	output := C.inet_ntop(C.AF_INET, buf, &str, C.INET6_ADDRSTRLEN)
 	//defer C.free(unsafe.Pointer(output))
 	//err := C.GoInt32(output)
