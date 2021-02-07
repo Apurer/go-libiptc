@@ -88,12 +88,12 @@ func InetPton(ip string) []byte {
 func InetNtop(b []byte) string {
 	buf := C.CBytes(b)
 	defer C.free(unsafe.Pointer(buf))
-	str := [C.INET6_ADDRSTRLEN]C.char
+	var str [C.INET6_ADDRSTRLEN]C.char
 	defer C.free(unsafe.Pointer(str))
 	output := C.inet_ntop(C.AF_INET, buf, str, C.INET6_ADDRSTRLEN)
 	defer C.free(unsafe.Pointer(output))
 	err := C.GoInt(output)
-	if  err == nil {
+	if err == nil {
 		cs_er := C.CString("inet_pton")
 		C.perror(cs_er)
 		C.free(unsafe.Pointer(cs_er))
