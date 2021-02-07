@@ -69,7 +69,7 @@ func InetPton(ip string) int {
 
 	cs := C.CString(ip)
 	defer C.free(unsafe.Pointer(cs))
-	s = C.inet_pton(C.AF_INET, &cs, buf)
+	s = C.inet_pton(C.AF_INET, cs, &buf)
 	if s <= 0 {
 		if s == 0 {
 			panic("Not in presentation format")
