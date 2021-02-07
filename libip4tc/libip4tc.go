@@ -63,7 +63,7 @@ type XtcHandle struct {
 	handle *C.struct_xtc_handle
 }
 
-func InetPton(string ip) int {
+func InetPton(ip string) int {
 	var s C.int
 	var buf [C.sizeof_struct_in_addr]C.uchar
 
