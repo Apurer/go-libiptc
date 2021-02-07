@@ -90,7 +90,7 @@ func InetNtop(b []byte) string {
 	defer C.free(unsafe.Pointer(buf))
 	var str C.char
 	//defer C.free(unsafe.Pointer(str))
-	output := C.inet_ntop(C.AF_INET, buf, str, C.INET6_ADDRSTRLEN)
+	output := C.inet_ntop(C.AF_INET, buf, &str, C.INET6_ADDRSTRLEN)
 	//defer C.free(unsafe.Pointer(output))
 	//err := C.GoInt32(output)
 	if output == nil {
@@ -100,7 +100,7 @@ func InetNtop(b []byte) string {
 		os.Exit(1)
 	}
 
-	return C.GoString(str)
+	return C.GoString(&str)
 }
 
 func (h XtcHandle) IptEntry2Rule(e *IptEntry) *common.Rule {
