@@ -65,8 +65,8 @@ type XtcHandle struct {
 
 func InetPton(ip string) int {
 	var s C.int
-	var buf [C.sizeof_struct_in_addr]C.uchar
-
+	//var buf [C.sizeof_struct_in_addr]C.uchar
+	buf := C.CBytes(make([]byte, C.sizeof_struct_in_addr))
 	cs := C.CString(ip)
 	defer C.free(unsafe.Pointer(cs))
 	s = C.inet_pton(C.AF_INET, cs, &buf)
