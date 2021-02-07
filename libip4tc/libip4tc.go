@@ -23,6 +23,7 @@ package libip4tc
 // #include <arpa/inet.h>
 // #include <libiptc/libiptc.h>
 // #include <stdlib.h>
+// #include <stdio.h>
 import "C"
 
 import (
