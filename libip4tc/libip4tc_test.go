@@ -78,4 +78,5 @@ func TestInit(t *testing.T) {
 func TestInetPton(t *testing.T) {
 	ip := InetPton("1.2.3.4")
 	fmt.Println(ip)
+	fmt.Printf("%d this is the number.\n", ip)
 }
