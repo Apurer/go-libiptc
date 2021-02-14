@@ -1,16 +1,16 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+// import (
+// 	"fmt"
+// 	"os"
+// )
 
 func main() {
-	h, err := TableInit("filter")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "append-rule: %s\n", err)
-		os.Exit(3)
-	}
+	// h, err := TableInit("filter")
+	// if err != nil {
+	// 	fmt.Fprintf(os.Stderr, "append-rule: %s\n", err)
+	// 	os.Exit(3)
+	// }
 
 	// var a C.uint
 
