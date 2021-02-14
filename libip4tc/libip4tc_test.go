@@ -76,7 +76,14 @@ func TestInit(t *testing.T) {
 }
 
 func TestInetPton(t *testing.T) {
-	buf := InetPton("1.2.3.4")
-	str := InetNtop(buf)
+	buf, err := InetPton("1.2.3.4")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	str, err := InetNtop(buf)
+	if err != nil {
+		t.Fatal(err)
+	}
 	fmt.Printf("%s this is the ip.\n", str)
 }

@@ -28,7 +28,7 @@ import "C"
 
 import (
 	"net"
-	"os"
+	//"os"
 	"runtime"
 	"unsafe"
 
@@ -63,44 +63,37 @@ type XtcHandle struct {
 	handle *C.struct_xtc_handle
 }
 
-func InetPton(ip string) []byte {
-	var s C.int
-	//var buf [C.sizeof_struct_in_addr]C.uchar
-	buf := C.CBytes(make([]byte, C.sizeof_struct_in6_addr))
-	cs := C.CString(ip)
-	defer C.free(unsafe.Pointer(cs))
-	s = C.inet_pton(C.AF_INET, cs, buf)
-	//defer C.free(unsafe.Pointer(s))
-	if s <= 0 {
-		if s == 0 {
-			panic("Not in presentation format")
-		} else {
-			cs_er := C.CString("inet_pton")
-			C.perror(cs_er)
-			C.free(unsafe.Pointer(cs_er))
-			os.Exit(1)
-		}
-	}
 
-	return C.GoBytes(buf, C.sizeof_struct_in6_addr)
+func InetPton(ip string) (buf []byte, osErr error) {
+	osErr = common.RelayCall(func() bool {
+		cbuf := C.CBytes(make([]byte, C.sizeof_struct_in6_addr))
+		cs := C.CString(ip)
+		defer C.free(unsafe.Pointer(cs))
+		r := C.inet_pton(C.AF_INET, cs, cbuf)
+
+		if r == 1 {
+			buf = C.GoBytes(cbuf, C.sizeof_struct_in6_addr)
+			return true
+		} else if r == 0 {
+			return false
+		}
+
+		panic("invalid return value")
+	}, "inet_pton", getNativeError)
+	return
 }
 
-func InetNtop(b []byte) string {
-	buf := C.CBytes(b)
-	defer C.free(unsafe.Pointer(buf))
-	var str C.char
-	//defer C.free(unsafe.Pointer(str))
-	output := C.inet_ntop(C.AF_INET, buf, &str, C.INET6_ADDRSTRLEN)
-	//defer C.free(unsafe.Pointer(output))
-	//err := C.GoInt32(output)
-	if output == nil {
-		cs_er := C.CString("inet_pton")
-		C.perror(cs_er)
-		C.free(unsafe.Pointer(cs_er))
-		os.Exit(1)
-	}
+func InetNtop(b []byte) (ipStr string, osErr error)  {
+	osErr = common.RelayCall(func() bool {
+		cbuf := C.CBytes(b)
+		defer C.free(unsafe.Pointer(cbuf))
+		var str C.char
+		r := C.inet_ntop(C.AF_INET, cbuf, &str, C.INET6_ADDRSTRLEN)
+		ipStr = C.GoString(&str)
+		return r != nil 
+	}, "inet_nton", getNativeError)
 
-	return C.GoString(&str)
+	return
 }
 
 func (h XtcHandle) IptEntry2Rule(e *IptEntry) *common.Rule {
