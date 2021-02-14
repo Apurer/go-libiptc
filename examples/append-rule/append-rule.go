@@ -3,12 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-
-	common "github.com/apurer/go-libiptc"
-	"github.com/apurer/go-libiptc/libip4tc"
-	"github.com/apurer/go-libiptc/libip6tc"
 )
-
 
 func main() {
 	h, err := TableInit("filter")
@@ -17,13 +12,12 @@ func main() {
 		os.Exit(3)
 	}
 
-	var a C.uint
-	
+	// var a C.uint
 
-	entry := new(IptEntry)
-	entry.ip.src.s_addr = 
+	// entry := new(IptEntry)
+	// entry.ip.src.s_addr =
 
-	var c common.XtChainLabel = "INPUT"
+	// var c common.XtChainLabel = "INPUT"
 
-	h.AppendEntry(c,)
+	// h.AppendEntry(c,)
 }
